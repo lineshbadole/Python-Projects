@@ -11,7 +11,7 @@ to_do_list = []
 
 while True:
     print('\n\n\n ************* TO DO LIST *************** \n\n')
-    user_action = input("What would you like to do: \n  1] ADD \n  2] SHOW the list \n  3] EDIT an existing TASK \n  4] Exit \n\n Enter your choice:  ")
+    user_action = input("What would you like to do: \n  1] ADD \n  2] SHOW the list \n  3] EDIT an existing TASK \n  4] Complete the Task \n  5] Exit \n\n Enter your choice:  ")
 
     user_action = user_action.strip()
 
@@ -41,7 +41,18 @@ while True:
             for i, task in enumerate(to_do_list, start=1):
                 print(f'{i}] {task}')
 
-        case 'exit' | '4' | 'Exit' | 'EXIT' | 'stop':
+        case 'complete' | '4' | 'Complete' | 'COMPLETE':
+            task_no = input('\n\n Which Task would you like to mark COMPLETE (please input task number) : ')
+            index = int(task_no) - 1
+
+            to_do_list.pop(index)
+            
+            print(f'\n\n SUCCESS: The Task is complete. Here is the updated list \n')
+            
+            for i, task in enumerate(to_do_list, start=1):
+                print(f'{i}] {task}')
+
+        case 'exit' | '5' | 'Exit' | 'EXIT' | 'stop':
             break
 
         case _:
