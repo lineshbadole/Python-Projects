@@ -8,6 +8,9 @@
 user_prompt = 'Enter Your To Do Task:'
 
 to_do_list = []
+file = open('files/todo.txt','r')
+to_do_list = file.readlines()
+file.close()
 
 while True:
     print('\n\n\n ************* TO DO LIST *************** \n\n')
@@ -17,8 +20,14 @@ while True:
 
     match user_action:
         case 'add' | '1' | 'Add' | 'ADD':
-            task = input('\n Enter a task: ')
+            task = input('\n Enter a task: ') + '\n'
+
+ 
             to_do_list.append(task)
+
+            file = open('files/todo.txt', 'w')
+            file.writelines(to_do_list)
+            file.close()
     
         case 'show' | '2' | 'Show' | 'SHOW':
             print('\n\n\n ************ Tasks in the LIST *********** ')
