@@ -35,7 +35,7 @@ while True:
                 print('NO TASK in the list. Please Add or Exit\n\n\n')
             
             for i, task in enumerate(to_do_list, start=1):
-                print(f'{i}] {task}')
+                print(f'{i}] {task.strip('\n')}')
   
         case 'edit' | '3' | 'EDIT' | 'Edit':
             task_no = input('\n\n Which Task would you like to EDIT (please input task number) : ')
