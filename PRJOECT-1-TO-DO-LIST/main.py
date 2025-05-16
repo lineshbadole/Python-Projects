@@ -8,9 +8,10 @@
 user_prompt = 'Enter Your To Do Task:'
 
 to_do_list = []
-file = open('files/todo.txt','r')
-to_do_list = file.readlines()
-file.close()
+
+with open('files/todo.txt','r') as file:
+    to_do_list = file.readlines()
+
 
 while True:
     print('\n\n\n ************* TO DO LIST *************** \n\n')
@@ -25,9 +26,9 @@ while True:
  
             to_do_list.append(task)
 
-            file = open('files/todo.txt', 'w')
-            file.writelines(to_do_list)
-            file.close()
+            with open('files/todo.txt','w') as file:
+                file.writelines(to_do_list)
+      
     
         case 'show' | '2' | 'Show' | 'SHOW':
             print('\n\n\n ************ Tasks in the LIST *********** ')
@@ -41,14 +42,18 @@ while True:
             task_no = input('\n\n Which Task would you like to EDIT (please input task number) : ')
             index = int(task_no) - 1
             
-            new_task = input('\n\n Enter the new task: ')
+            new_task = input('\n\n Enter the new task: ') + '\n'
             old_task = to_do_list[index]
             to_do_list[index] = new_task
 
             print(f'\n\n SUCCESS: The Task has been updated \n')
             
             for i, task in enumerate(to_do_list, start=1):
-                print(f'{i}] {task}')
+                print(f'{i}] {task.strip('\n')}')
+
+            #update the file with the new list
+            with open('files/todo.txt','w') as file:
+                file.writelines(to_do_list)
 
         case 'complete' | '4' | 'Complete' | 'COMPLETE':
             task_no = input('\n\n Which Task would you like to mark COMPLETE (please input task number) : ')
@@ -59,7 +64,11 @@ while True:
             print(f'\n\n SUCCESS: The Task is complete. Here is the updated list \n')
             
             for i, task in enumerate(to_do_list, start=1):
-                print(f'{i}] {task}')
+                print(f'{i}] {task.strip('\n')}')
+            
+            #update the file with the new list
+            with open('files/todo.txt','w') as file:
+                file.writelines(to_do_list)
 
         case 'exit' | '5' | 'Exit' | 'EXIT' | 'stop':
             break

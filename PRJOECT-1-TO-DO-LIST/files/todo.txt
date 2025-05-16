@@ -1,4 +1,4 @@
 open
-fix
-choose
-finish python course
+Finish the python course
+Read more 
+be positive 
