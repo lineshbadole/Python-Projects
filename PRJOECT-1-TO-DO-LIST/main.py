@@ -40,35 +40,51 @@ while True:
   
         case 'edit' | '3' | 'EDIT' | 'Edit':
             task_no = input('\n\n Which Task would you like to EDIT (please input task number) : ')
-            index = int(task_no) - 1
-            
-            new_task = input('\n\n Enter the new task: ') + '\n'
-            old_task = to_do_list[index]
-            to_do_list[index] = new_task
+            try: 
+                index = int(task_no) - 1
+   
+                old_task = to_do_list[index]
+                new_task = input('\n\n Enter the new task: ') + '\n'
+                to_do_list[index] = new_task
 
-            print(f'\n\n SUCCESS: The Task has been updated \n')
-            
-            for i, task in enumerate(to_do_list, start=1):
-                print(f'{i}] {task.strip('\n')}')
+                print(f'\n\n SUCCESS: The Task has been updated \n')
+                
+                for i, task in enumerate(to_do_list, start=1):
+                    print(f'{i}] {task.strip('\n')}')
 
-            #update the file with the new list
-            with open('files/todo.txt','w') as file:
-                file.writelines(to_do_list)
+                #update the file with the new list
+                with open('files/todo.txt','w') as file:
+                    file.writelines(to_do_list)
+            except ValueError:
+                print('ERROR: Please Enter a valid integer number ')
+                continue
+            except IndexError:
+                print('\n\n ERROR: Item number not found in the list. Please enter the valid number in the list below \n')
+                for i, task in enumerate(to_do_list, start=1):
+                    print(f'{i}] {task.strip('\n')}')                
+                continue
 
         case 'complete' | '4' | 'Complete' | 'COMPLETE':
             task_no = input('\n\n Which Task would you like to mark COMPLETE (please input task number) : ')
-            index = int(task_no) - 1
+            
+            try: 
+                index = int(task_no) - 1
 
-            to_do_list.pop(index)
-            
-            print(f'\n\n SUCCESS: The Task is complete. Here is the updated list \n')
-            
-            for i, task in enumerate(to_do_list, start=1):
-                print(f'{i}] {task.strip('\n')}')
-            
-            #update the file with the new list
-            with open('files/todo.txt','w') as file:
-                file.writelines(to_do_list)
+                to_do_list.pop(index)
+                
+                print(f'\n\n SUCCESS: The Task is complete. Here is the updated list \n')
+                
+                for i, task in enumerate(to_do_list, start=1):
+                    print(f'{i}] {task.strip('\n')}')
+                
+                #update the file with the new list
+                with open('files/todo.txt','w') as file:
+                    file.writelines(to_do_list)
+            except IndexError:
+                print('\n\n ERROR: Item number not found in the list. Please enter the valid number in the list below \n')
+                for i, task in enumerate(to_do_list, start=1):
+                    print(f'{i}] {task.strip('\n')}')                
+                continue
 
         case 'exit' | '5' | 'Exit' | 'EXIT' | 'stop':
             break
